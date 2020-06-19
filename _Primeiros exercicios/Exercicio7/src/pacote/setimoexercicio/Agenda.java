@@ -10,7 +10,6 @@ public class Agenda implements metodosContatos {
 
 	@Override
 	public void addContact() {
-
 		String auxiNome = "", auxiEmail = "";
 
 		for (int cont = 0; cont < vetorContacto.length; cont++) {
@@ -26,12 +25,21 @@ public class Agenda implements metodosContatos {
 
 			System.out.println("\nQuer adicionar mais algum contacto?");
 			resp = entrada.next();
+			
 			if (resp.equalsIgnoreCase("n")) {
-				System.out.println("Faltam mais " + (vetorContacto.length - (cont + 1)) + " posições do vetor");
+				System.out.println("\nFaltam mais " + (vetorContacto.length - (cont + 1)) + " posições do vetor");
 				break;
 			}
+			
+			if (vetorContacto[4] != null) {
+				System.out.println("Não é possivel adicionar mais contactos porque o vetor apenas tem " + vetorContacto.length + " posições");
+				break;
+				
+			}
+			
+			
 		}
-
+		
 	}
 
 	/* Metodo da interface que ira returnar */
@@ -61,14 +69,15 @@ public class Agenda implements metodosContatos {
 		for (int cont = 0; cont < vetorContacto.length; cont++) {
 //			vetorContacto[cont] = new Contacto();
 			if (vetorContacto[cont].getNome().equals(nomeContacto)) {
-				vetorContacto[cont] = null;
+				vetorContacto[cont].setEmail(null);
+				vetorContacto[cont].setNome(null);
 				System.out.println("Contacto excluido com sucesso!");
 				break;
 			} else if (vetorContacto[cont].getNome() == null) {
 				System.out.println("O contacto nao existe");
 			}
 		}
-
+		
 		return contacto;
 	}
 
@@ -79,7 +88,6 @@ public class Agenda implements metodosContatos {
 		Scanner input = new Scanner(System.in);
 		String resp;
 		boolean fim = false;
-		
 
 		while (!fim) {
 			System.out.println("-------- 7º Ultimo exercicio --------\n");
@@ -87,6 +95,7 @@ public class Agenda implements metodosContatos {
 			System.out.println("A. Adicionar contactos (Obrigatorio caso não tenha adicionado)");
 			System.out.println("B. Procurar contacto por nome (Apenas se já tiver adicionado algum contacto)");
 			System.out.println("C. Excluir contacto (Apenas se já tiver adicionado algum contacto)");
+
 			resp = input.next();
 			boolean sair = false;
 
@@ -132,34 +141,35 @@ public class Agenda implements metodosContatos {
 
 				case "c":
 				case "C":
-				boolean pararRep = false;
-				while(!pararRep) {
-					System.out.println("Qual o contacto que pretende excluir? Digite o nome");
-					String auxiExclusao = input.next();
-					deleteContact(auxiExclusao);
-					
-					System.out.println("Pretende excluir mais algum contacto?");
-					auxiExclusao = entrada.next();
-					switch (auxiExclusao) {
-					case "S":
-					case "s":
-						pararRep = false;
-						break;
-						
-					case "N":
-					case "n":
-						pararRep = true;
-						sair = true;
-						break;
+					boolean pararRep = false;
+					while (!pararRep) {
+						System.out.println("Qual o contacto que pretende excluir? Digite o nome");
+						String auxiExclusao = input.next();
+						deleteContact(auxiExclusao);
 
-					default:
-						System.out.println("Resposta invalida");
-						pararRep = true;				
-						break;
+						System.out.println("Pretende excluir mais algum contacto?");
+						auxiExclusao = entrada.next();
+						switch (auxiExclusao) {
+						case "S":
+						case "s":
+							pararRep = false;
+							break;
+
+						case "N":
+						case "n":
+							pararRep = true;
+							sair = true;
+							break;
+
+						default:
+							System.out.println("Resposta invalida");
+							pararRep = true;
+							break;
+						}
+
 					}
-						
-				}
 					break;
+
 				default:
 					System.out.println("Resposta não é válida");
 					break;
