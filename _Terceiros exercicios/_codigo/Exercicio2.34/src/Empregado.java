@@ -7,7 +7,7 @@ public class Empregado {
 	private int horasTrabalhoPorMes;
 	private double salarioPorHora;
 
-//	CONSTRUTOR QUE INSTACIOLIZARA COM UMA INSTACIA DE EMPREGADO ATRIBUIDO
+//	CONSTRUTOR QUE INSTACIALIZARA UMA INSTACIA DE EMPREGADO ATRIBUIDO
 	Empregado(String nome, String departamento, int horasTrabalhoPorMes, double salarioPorHora) {
 		this.nome = nome;
 		this.departamento = departamento;
