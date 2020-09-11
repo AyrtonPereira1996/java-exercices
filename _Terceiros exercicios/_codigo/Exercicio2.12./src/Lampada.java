@@ -12,7 +12,13 @@ public class Lampada {
 	protected int watts;
 	protected Contador contagem = new Contador();
 	protected int numeroVezes = 0;
+	protected boolean isQueimada = false;
 	
+	
+//	METODO QUE RETORNA LAMPADA QUEIMADA
+	public boolean lampadaQueimada() {
+		return true;
+	}
 	
 //	METODO PARA ACENDER LAMPADA
 	public void acenderLampada() {
@@ -75,6 +81,64 @@ public class Lampada {
 	public void setNumeroVezes(int numeroVezes) {
 		this.numeroVezes = numeroVezes;
 	}
+
+	public String getMarcaLampada() {
+		return marcaLampada;
+	}
+
+	public void setMarcaLampada(String marcaLampada) {
+		this.marcaLampada = marcaLampada;
+	}
+
+	public String getTipoLampada() {
+		return tipoLampada;
+	}
+
+	public void setTipoLampada(String tipoLampada) {
+		this.tipoLampada = tipoLampada;
+	}
+
+	public int getCapacidadeLampada() {
+		return capacidadeLampada;
+	}
+
+	public void setCapacidadeLampada(int capacidadeLampada) {
+		this.capacidadeLampada = capacidadeLampada;
+	}
+
+	public String getCorLuz() {
+		return corLuz;
+	}
+
+	public void setCorLuz(String corLuz) {
+		this.corLuz = corLuz;
+	}
+
+	public double getPrecoLampada() {
+		return precoLampada;
+	}
+
+	public void setPrecoLampada(double precoLampada) {
+		this.precoLampada = precoLampada;
+	}
+
+	public Contador getContagem() {
+		return contagem;
+	}
+
+	public void setContagem(Contador contagem) {
+		this.contagem = contagem;
+	}
+
+	public boolean isQueimada() {
+		return isQueimada;
+	}
+
+	public void setQueimada(boolean isQueimada) {
+		this.isQueimada = isQueimada;
+	}
+	
+	
 	
 
 }

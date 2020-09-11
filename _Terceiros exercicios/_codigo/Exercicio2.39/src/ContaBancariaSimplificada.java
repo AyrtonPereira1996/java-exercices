@@ -8,6 +8,7 @@ public class ContaBancariaSimplificada {
 	private String tipoConta;
 	private double montanteMonetario;
 	private LocalDate dataAbertura;
+	private boolean contaAberta = false;
 	
 //METODO CONTRUSTOR
 public ContaBancariaSimplificada(String titular, String tipoConta, double montanteMonetario) {
@@ -16,28 +17,56 @@ public ContaBancariaSimplificada(String titular, String tipoConta, double montan
 
 //METODO QUE IRA PERMITIR ABRIR CONTA
 	private void abrirConta(String titular, String tipoConta, double montanteMonetario, LocalDate dataAbertura) {
+		if(montanteMonetario < 0) {
+			System.err.println("Não é possivel abrir conta com montante negativo");
+			contaAberta = false;
+			
+		} else if(montanteMonetario > 0) {
 		setTitularConta(titular);
 		setTipoConta(tipoConta);
 		setMontanteMonetario(montanteMonetario);
 		setDataAbertura(LocalDate.now());
-		System.out.println("Conta bancaria aberta com sucesso!");
+		contaAberta = true;
+		System.out.println("Conta bancaria aberta com sucesso!");}
 	}
 	
 //MOSTRAR DADOS DE TITULAR
 	public void mostrarDados() {
-		System.out.println("Titular da conta -> " + this.getTitularConta() + "\nTipo de conta -> " + this.getTipoConta() + "\nValor monetario -> " + this.getMontanteMonetario() + "\nData abertura -> " + this.getDataAbertura());
+		if (this.contaAberta == false) {
+			System.err.println("A conta nao está criada, por favor crie uma!");
+		} else if (this.contaAberta == true) {
+			System.out.println("Titular da conta -> " + this.getTitularConta() + "\nTipo de conta -> " + this.getTipoConta() + "\nValor monetario -> " + this.getMontanteMonetario() + "\nData abertura -> " + this.getDataAbertura());
+		}
+		
 	}
 
 //METODO PARA DEPOSITAR
-	public void depositar(double montanteDepositar) {
-		this.setMontanteMonetario(this.getMontanteMonetario() + montanteMonetario);
-		System.out.println("Valor actual corresponde a " + this.getMontanteMonetario());
+	public void deposita(double montanteDepositar) {
+		if (this.contaAberta == false) {
+			System.err.println("A conta nao está criada, por favor crie uma!");
+		} else if (this.getMontanteMonetario() < 0 || this.contaAberta == true) {
+			System.out.println("A sua conta esta com saldo negativo");
+			this.setMontanteMonetario(this.getMontanteMonetario() + montanteMonetario);
+			System.out.println("Valor actual corresponde a " + this.getMontanteMonetario());
+		} else {
+			this.setMontanteMonetario(this.getMontanteMonetario() + montanteMonetario);
+			System.out.println("Valor actual corresponde a " + this.getMontanteMonetario());
+		}
+		
 	}
 	
 //METODO PARA RETIRAR
-	public void retirarValor(double montanteRetirar) {
+	public void retira(double montanteRetirar) {
+		if (this.getMontanteMonetario() < 0) {
+			System.err.println("Não é possivel retirar montante da sua conta porque seu saldo é negativo.");
+		} else if (this.getMontanteMonetario() == 0) {
+			System.err.println("Não é possivel retirar montante da sua conta porque seu saldo é igual a zero.");
+		} else if (montanteRetirar > this.getMontanteMonetario()) {
+			System.out.println("Ao realizar esta operecao ira ficar com saldo negativo");
+		} else {
 		this.setMontanteMonetario(getMontanteMonetario() - montanteRetirar);
 		System.out.println("Valor actual corresponde a " + this.getMontanteMonetario());
+		}	
 	}
 	
 //	METODOS GETTERS E SETTERS
